@@ -1,38 +1,29 @@
+from flask import Flask, render_template, request
 import random
 
-def greeting_generator():
-    greetings = [
-        "Hello, {}! It's great to see you.",
-        "Hi, {}! Hope you're having a good day.",
-        "Hey, {}! What's up?",
-        "Good to see you, {}! How have you been?",
-        "Hello, {}! Nice to meet you."
-    ]
+app = Flask(__name__)
 
-    while True:
-        user_info = []
-
-        name = input("\nPlease enter your name (or type 'exit' to stop): ")
-        if name.lower() == 'exit':
-            print("Goodbye!")
-            break
-
+@app.route('/', methods=['GET', 'POST'])
+def index():
+    user_info = {}
+    if request.method == 'POST':
+        user_info = {
+            'name': request.form.get('name'),
+            'color': request.form.get('color'),
+            'food': request.form.get('food'),
+            'hobby': request.form.get('hobby'),
+        }
+        greetings = [
+            "Hello, {}! It's great to see you.",
+            "Hi, {}! Hope you're having a good day.",
+            "Hey, {}! What's up?",
+            "Good to see you, {}! How have you been?",
+            "Hello, {}! Nice to meet you."
+        ]
         random_greeting = random.choice(greetings)
-        print(random_greeting.format(name))
+        user_info['greeting'] = random_greeting.format(user_info['name'])
 
-        user_info.append(f"Name: {name}")
+    return render_template('index.html', user_info=user_info)
 
-        color = input("What's your favorite color? ")
-        user_info.append(f"Favorite Color: {color}")
-
-        food = input("What's your favorite food? ")
-        user_info.append(f"Favorite Food: {food}")
-
-        hobby = input("What's your favorite hobby? ")
-        user_info.append(f"Favorite Hobby: {hobby}")
-
-        print("\nHere is your information:")
-        for info in user_info:
-            print(info)
-
-greeting_generator()
+if __name__ == '__main__':
+    app.run(debug=True)

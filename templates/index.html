@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Get a Personalized Greeting</h2>
+
+<form action="/" method="post">
+  Name:<br>
+  <input type="text" name="name">
+  <br>
+  Favorite Color:<br>
+  <input type="text" name="color">
+  <br>
+  Favorite Food:<br>
+  <input type="text" name="food">
+  <br>
+  Favorite Hobby:<br>
+  <input type="text" name="hobby">
+  <br><br>
+  <input type="submit" value="Submit">
+</form> 
+
+{% if user_info %}
+<h2>Your Information:</h2>
+<p>{{ user_info['greeting'] }}</p>
+<p>Favorite Color: {{ user_info['color'] }}</p>
+<p>Favorite Food: {{ user_info['food'] }}</p>
+<p>Favorite Hobby: {{ user_info['hobby'] }}</p>
+{% endif %}
+
+</body>
+</html>
