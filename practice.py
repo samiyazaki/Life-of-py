@@ -18,7 +18,8 @@ def index():
             "Hi, {}! Hope you're having a good day.",
             "Hey, {}! What's up?",
             "Good to see you, {}! How have you been?",
-            "Hello, {}! Nice to meet you."
+            "Hello, {}! Nice to meet you.",
+            "How you doin', {}?"
         ]
         random_greeting = random.choice(greetings)
         user_info['greeting'] = random_greeting.format(user_info['name'])
